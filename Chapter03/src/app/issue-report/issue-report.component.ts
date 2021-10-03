@@ -6,22 +6,24 @@ import { IssuesService } from '../issues.service';
 @Component({
   selector: 'app-issue-report',
   templateUrl: './issue-report.component.html',
-  styleUrls: ['./issue-report.component.css']
+  styleUrls: ['./issue-report.component.css'],
 })
 export class IssueReportComponent implements OnInit {
-
   @Output() formClose = new EventEmitter();
   issueForm: FormGroup | undefined;
   suggestions: Issue[] = [];
 
-  constructor(private builder: FormBuilder, private issueService: IssuesService) { }
+  constructor(
+    private builder: FormBuilder,
+    private issueService: IssuesService
+  ) {}
 
   ngOnInit(): void {
     this.issueForm = this.builder.group({
       title: ['', Validators.required],
       description: [''],
       priority: ['', Validators.required],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
     });
 
     this.issueForm.controls.title.valueChanges.subscribe((title: string) => {
@@ -38,5 +40,4 @@ export class IssueReportComponent implements OnInit {
     this.issueService.createIssue(this.issueForm?.value);
     this.formClose.emit();
   }
-
 }

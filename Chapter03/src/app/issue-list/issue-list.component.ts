@@ -5,15 +5,14 @@ import { IssuesService } from '../issues.service';
 @Component({
   selector: 'app-issue-list',
   templateUrl: './issue-list.component.html',
-  styleUrls: ['./issue-list.component.css']
+  styleUrls: ['./issue-list.component.css'],
 })
 export class IssueListComponent implements OnInit {
-
   issues: Issue[] = [];
   showReportIssue = false;
   selectedIssue: Issue | null = null;
 
-  constructor(private issueService: IssuesService) { }
+  constructor(private issueService: IssuesService) {}
 
   ngOnInit(): void {
     this.getIssues();
@@ -35,5 +34,4 @@ export class IssueListComponent implements OnInit {
   private getIssues() {
     this.issues = this.issueService.getPendingIssues();
   }
-
 }
